@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Solution | Devmountain Foundations</title>
+
+      <link
+        href="../_static/pygments.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="../_static/devmountain.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/devmountain.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/plot_directive.css" />
+          <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+      <script src="../_static/pdfobject.min.js"></script>
+      
+  </head>
+  <body>
+      <div id="handouts-container">
+        <header id="page-header">
+            <p id="project-title">Devmountain Foundations</p>
+            <p id="page-title">Solution</p>
+              <p id="backlink">
+                <a href="/"> &laquo; Back to Homepage </a>
+              </p>
+        </header>
+
+        <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Solution</a></li>
+</ul>
+</nav>
+
+        <main id="page-content">
+            <section class="section" id="solution">
+<h1>Solution</h1>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="c1">-- Ex 1:</span>
+
+<span class="c1">-- Task: Write a query that shows all the information about all the salespeople</span>
+<span class="c1">-- in the database. Use a basic select query.</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 2:</span>
+
+<span class="c1">-- Task: Write a query that shows all the information about all salespeople</span>
+<span class="c1">-- from the &#39;Northwest&#39; region.</span>
+
+<span class="k">SELECT</span> <span class="o">*</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Northwest&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 3:</span>
+
+<span class="c1">-- Task: Write a query that shows just the emails of the salespeople from</span>
+<span class="c1">-- the &#39;Southwest&#39; region.</span>
+
+<span class="k">SELECT</span> <span class="n">email</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Southwest&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 4:</span>
+
+<span class="c1">-- Task: Write a query that shows the given name, surname, and email of all</span>
+<span class="c1">-- salespeople in the &#39;Northwest&#39; region.</span>
+
+<span class="k">SELECT</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">email</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Northwest&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 5:</span>
+
+<span class="c1">-- Task: Write a query that shows the common name of melons that cost more</span>
+<span class="c1">-- than $5.00.</span>
+
+<span class="k">SELECT</span> <span class="n">common_name</span>
+<span class="k">FROM</span> <span class="n">Melons</span>
+<span class="k">WHERE</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 6:</span>
+
+<span class="c1">-- Task: Write a query that shows the common name and price for all</span>
+<span class="c1">-- watermelons that cost more than $5.00.</span>
+
+<span class="k">SELECT</span> <span class="n">common_name</span><span class="p">,</span> <span class="n">price</span>
+<span class="k">FROM</span> <span class="n">Melons</span>
+<span class="k">WHERE</span> <span class="n">melon_type</span> <span class="o">=</span> <span class="s1">&#39;Watermelon&#39;</span>
+  <span class="k">AND</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 7:</span>
+
+<span class="c1">-- Task: Write a query that displays all common names of melons that</span>
+<span class="c1">-- start with the letter &#39;C&#39;.</span>
+
+<span class="k">SELECT</span> <span class="n">common_name</span>
+<span class="k">FROM</span> <span class="n">Melons</span>
+<span class="k">WHERE</span> <span class="n">common_name</span> <span class="k">LIKE</span> <span class="s1">&#39;C%&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 8:</span>
+
+<span class="c1">-- Task: Write a query that shows the common name of any melon with</span>
+<span class="c1">-- &#39;Golden&#39; anywhere in the common name.</span>
+
+<span class="k">SELECT</span> <span class="n">common_name</span>
+<span class="k">FROM</span> <span class="n">Melons</span>
+<span class="k">WHERE</span> <span class="n">common_name</span> <span class="k">LIKE</span> <span class="s1">&#39;%Golden%&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 9:</span>
+
+<span class="c1">-- Task: Write a query that shows all the distinct regions that a</span>
+<span class="c1">-- salesperson can belong to.</span>
+
+<span class="k">SELECT</span> <span class="k">DISTINCT</span><span class="p">(</span><span class="n">region</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 10:</span>
+
+<span class="c1">-- Task: Write a query that shows the emails of all salespeople from</span>
+<span class="c1">-- both the Northwest and Southwest regions.</span>
+
+<span class="k">SELECT</span> <span class="n">email</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Northwest&#39;</span>
+  <span class="k">OR</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Southwest&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 11:</span>
+
+<span class="c1">-- Task: Write a query that shows the emails of all salespeople from</span>
+<span class="c1">-- both the Northwest and Southwest regions, this time using an &#39;IN&#39; clause.</span>
+
+<span class="k">SELECT</span> <span class="n">email</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;Northwest&#39;</span><span class="p">,</span> <span class="s1">&#39;Southwest&#39;</span><span class="p">);</span>
+
+
+<span class="c1">-- Ex 12:</span>
+
+<span class="c1">-- Task: Write a query that shows the email, given name, and surname of</span>
+<span class="c1">-- all salespeople in either the Northwest or Southwest regions whose</span>
+<span class="c1">-- surnames start with the letter &#39;M&#39;.</span>
+
+<span class="k">SELECT</span> <span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span>
+<span class="k">FROM</span> <span class="n">Salespeople</span>
+<span class="k">WHERE</span> <span class="n">region</span> <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;Northwest&#39;</span><span class="p">,</span> <span class="s1">&#39;Southwest&#39;</span><span class="p">)</span>
+  <span class="k">AND</span> <span class="n">last_name</span> <span class="k">LIKE</span> <span class="s1">&#39;M%&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 13:</span>
+
+<span class="c1">-- Task: Write a query that shows the melon type, common name, price, and</span>
+<span class="c1">-- the price of the melon given in euros. The &#39;melons&#39; table has prices in</span>
+<span class="c1">-- dollars, and the dollar to euro conversion rate is 0.73.</span>
+
+<span class="k">SELECT</span> <span class="n">melon_type</span><span class="p">,</span> <span class="n">common_name</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">price</span> <span class="o">*</span> <span class="mi">0</span><span class="p">.</span><span class="mi">73</span>
+<span class="k">FROM</span> <span class="n">Melons</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 14:</span>
+
+<span class="c1">-- Task: Write a query that shows the total number of customers in our</span>
+<span class="c1">-- customer table.</span>
+
+<span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Customers</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 15:</span>
+
+<span class="c1">-- Task: Write a query that counts the number of orders shipped to</span>
+<span class="c1">-- California.</span>
+
+<span class="k">SELECT</span> <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Orders</span>
+<span class="k">WHERE</span> <span class="n">shipto_state</span> <span class="o">=</span> <span class="s1">&#39;CA&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 16:</span>
+
+<span class="c1">-- Task: Write a query that shows the total amount of money spent</span>
+<span class="c1">-- across all melon orders.</span>
+
+<span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="n">order_total</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Orders</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 17:</span>
+
+<span class="c1">-- Task: Write a query that shows the average order cost.</span>
+
+<span class="k">SELECT</span> <span class="k">AVG</span><span class="p">(</span><span class="n">order_total</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Orders</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 18:</span>
+
+<span class="c1">-- Task: Write a query that shows the order total that was lowest in price.</span>
+
+<span class="k">SELECT</span> <span class="k">MIN</span><span class="p">(</span><span class="n">order_total</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Orders</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 19:</span>
+
+<span class="c1">-- Task: Write a query that fetches the id of the customer whose email</span>
+<span class="c1">-- is &#39;pclark74@gmail.com&#39;.</span>
+
+<span class="k">SELECT</span> <span class="n">id</span>
+<span class="k">FROM</span> <span class="n">Customers</span>
+<span class="k">WHERE</span> <span class="n">email</span> <span class="o">=</span> <span class="s1">&#39;pclark74@gmail.com&#39;</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 20:</span>
+
+<span class="c1">-- Task: Write a query that shows the id, status and order_total for all</span>
+<span class="c1">-- orders made by customer 100.</span>
+
+<span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">order_total</span>
+<span class="k">FROM</span> <span class="n">Orders</span>
+<span class="k">WHERE</span> <span class="n">customer_id</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+
+
+<span class="c1">-- Ex 21:</span>
+
+<span class="c1">--  Task: Write a single query that shows the id, status, and order total</span>
+<span class="c1">-- for all orders made by &#39;pclark74@gmail.com&#39;. Use a sub-select to do this.</span>
+
+<span class="k">SELECT</span> <span class="n">id</span><span class="p">,</span> <span class="n">status</span><span class="p">,</span> <span class="n">order_total</span>
+<span class="k">FROM</span> <span class="n">Orders</span>
+<span class="k">WHERE</span> <span class="n">customer_id</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="k">SELECT</span> <span class="n">id</span>
+  <span class="k">FROM</span> <span class="n">Customers</span>
+  <span class="k">WHERE</span> <span class="n">email</span> <span class="o">=</span> <span class="s1">&#39;pclark74@gmail.com&#39;</span>
+  <span class="p">);</span>
+
+
+<span class="c1">-- Ex 22:</span>
+
+<span class="c1">-- Write a query that shows the total amount of revenue that comes</span>
+<span class="c1">-- from internet orders.</span>
+
+<span class="k">SELECT</span> <span class="k">SUM</span><span class="p">(</span><span class="n">order_total</span><span class="p">)</span>
+<span class="k">FROM</span> <span class="n">Orders</span>
+<span class="k">WHERE</span> <span class="n">salesperson_id</span> <span class="k">is</span> <span class="k">NULL</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+
+        </main>
+
+        <footer id="page-footer">
+            <p>&copy; 2022 Devmountain</p>
+        </footer>
+      </div>
+
+      <script src="../_static/main.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+  </body>
+</html>

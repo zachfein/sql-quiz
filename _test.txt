@@ -1,0 +1,51 @@
+Setup:
+
+    >>> import os
+    >>> os.system('dropdb quiz --if-exists')
+    0
+    >>> os.system('createdb quiz')
+    0
+    >>> os.system('psql quiz < database.sql')
+    0
+
+Since this is interactive, let's have a fake input handler:
+
+    >>> import sys
+    >>> def fake_input(prompt):
+    ...     sys.stdout.write(prompt)
+    ...     v = _inputs.pop(0)
+    ...     print(v)
+    ...     return v
+
+    >>> try:
+    ...     import __builtin__ as b    # Python 2
+    ... except ImportError:
+    ...     import builtins as b       # Python 3
+
+    >>> b.raw_input = b.input = fake_input
+
+    >>> _inputs = ['\\next' for _ in range(26)] + ['\quit']
+
+
+quiz.py
+-------
+
+Create empty class in __main__ namespace for pickle to unpickle into:
+
+    >>> import sys
+    >>> class Problem(object): pass
+    >>> sys.modules['__main__'].Problem = Problem
+
+    >>> import quiz
+    >>> q = quiz.SQLQuiz()
+    >>> q.play() # doctest: +ELLIPSIS
+    <BLANKLINE>
+    <BLANKLINE>
+    Hackbright Academy - Introductory SQL Exercise
+    ----------------------------------------------
+    ...
+
+Clean up
+
+    >>> os.system('dropdb quiz')
+    0

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Setup | Devmountain Foundations</title>
+
+      <link
+        href="_static/pygments.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="_static/devmountain.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="_static/devmountain.css" />
+          <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+          <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+      <script src="_static/pdfobject.min.js"></script>
+      
+  </head>
+  <body>
+      <div id="handouts-container">
+        <header id="page-header">
+            <p id="project-title">Devmountain Foundations</p>
+            <p id="page-title">Setup</p>
+              <p id="backlink">
+                <a href="/"> &laquo; Back to Homepage </a>
+              </p>
+        </header>
+
+        <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Setup</a><ul>
+<li><a class="reference internal" href="#download-materials">Download Materials</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#sql-quiz">SQL Quiz</a></li>
+</ul>
+</nav>
+
+        <main id="page-content">
+            <section class="section" id="setup">
+<h1>Setup</h1>
+<section class="section" id="download-materials">
+<h2>Download Materials</h2>
+<p>Download the materials for this exercise <a class="reference external" href="http://ed.devmountain.com/materials/py1/exercises/sql-quiz.zip">here</a>.</p>
+</section>
+</section>
+<section class="section" id="sql-quiz">
+<h1>SQL Quiz</h1>
+<p>This exercise provides an interactive learning system and quiz on SQL.</p>
+<p>First remember to create a virtual environment, activate it, and run:</p>
+<pre class="console literal-block">$ <span class="cmd">pip3 install -r requirements.txt</span></pre>
+<p>Create a shell file to store information you don’t want to upload to Github, which we will soon export as environment variables. Let’s call it “secrets.sh” which already exists in our .gitignore file.</p>
+<pre class="console literal-block">$ <span class="cmd">touch secrets.sh</span></pre>
+<p>Now open up that newly created shell file, and add your export commands.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">secrets.sh</span></div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="s2">&quot;POSTGRES_USER&quot;</span><span class="o">=</span><span class="s2">&quot;your_username&quot;</span>
+<span class="nb">export</span> <span class="s2">&quot;POSTGRES_PASSWORD&quot;</span><span class="o">=</span><span class="s2">&quot;your_password&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Please replace the “your_username” and “your_password” with your Postgres username and password. Once you have done that, run the “source” command on it, so they are exported to your environment variables. The Python file expects this information to exist in your environment to execute the code with proper permissions.</p>
+<pre class="console literal-block">$ <span class="cmd">source secrets.sh</span></pre>
+<p>Create an empty database with:</p>
+<pre class="console literal-block">$ <span class="cmd">createdb quiz</span></pre>
+<p>Source the data to the empty postgres database:
+(Note: for PC users, you maybe have to do this command in Command Prompt, instead of GitBash.)</p>
+<pre class="console literal-block">$ <span class="cmd">psql quiz &lt; database.sql</span></pre>
+<p>Start the quiz with:</p>
+<pre class="console literal-block">$ <span class="cmd">python3</span> <span class="cmd">quiz.py</span></pre>
+<p>Read the directions carefully for your first task. Try typing a solution
+into the prompt. It will keep prompting you for the answer until you
+answer it successfully.</p>
+<p>In many cases, you’ll need to know the “schema” of a table in order to
+query it (“schema” is the name for the definition of a table, including
+the names of its fields and the type of data they hold).</p>
+<p>You can see the schema for the database with the <code class="docutils literal notranslate"><span class="pre">\dt</span></code>
+command:</p>
+<pre class="console literal-block">SQL [1]&gt; <span class="cmd">\dt</span>
+              List of relations
+ Schema |    Name     | Type  |     Owner
+--------+-------------+-------+---------------
+ public | customers   | table | ubermelon
+ public | melons      | table | ubermelon
+ public | order_items | table | ubermelon
+ public | orders      | table | ubermelon
+ public | salespeople | table | ubermelon
+(5 rows)</pre>
+<p>You can see the schema for a particular table by using the <code class="docutils literal notranslate"><span class="pre">\d</span></code>
+command:</p>
+<pre class="console literal-block">SQL [1]&gt; <span class="cmd">\d salespeople</span>
+    Column    | Type                    | Modifiers
+--------------+-------------------------+---------------
+ id           | integer                 | not null
+ email        | character varying(120)  | not null
+ first_name   | character varying(30)   | not null
+ last_name    | character varying(30)   | not null
+ region       | character varying(20)   | not null
+(5 rows)</pre>
+<p>You can also see other system help with the <code class="docutils literal notranslate"><span class="pre">\help</span></code> command:</p>
+<pre class="console literal-block">SQL [1]&gt; <span class="cmd">\help</span>
+
+The following commands are available:
+
+  \help    - Display this message
+  \hint    - Show a hint about how to formulate the query
+  \next    - Skip the current problem
+  \problem - Show the current problem statement
+  \quit    - Quit the program
+  \dt      - List the tables
+  \d &lt;tbl&gt; - Show the schema used to create named table
+
+Any other commands will be interpreted as a SQL query and executed against the
+problem set database.</pre>
+<p>The quiz keeps track of all of your correct answers for you. If you quit
+the quiz and restart it, it will remember which answers you’ve already
+given successfully and start you with your first unsolved question.</p>
+<p>It does this by keeping all of your correct answers in a file in the
+exercise directory called <cite>answers.sql</cite>. You don’t need to do anything
+with this file (for example, you <strong>don’t</strong> need to manually paste your
+answers in or anything like that; this is done for you). You may want
+to check this file into your GitHub, though, so you have a record of
+the problems you solved.</p>
+</section>
+
+        </main>
+
+        <footer id="page-footer">
+            <p>&copy; 2022 Devmountain</p>
+        </footer>
+      </div>
+
+      <script src="_static/main.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+  </body>
+</html>
